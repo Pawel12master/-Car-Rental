@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Cars Managment System</title>
+</head>
+
+<body>
+<div th:replace="base/header :: header"></div>
+    <div  class="container my-2">
+        <h1>Cars List</h1>
+        <a th:href="@{/cars/showNewCarForm}" class="btn btn-primary btn-sm mb-3" th:if="${#authentication.getPrincipal().getAuthorities().get(0).toString() == 'ADMIN'}"> Add Car</a>
+        <table class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Car Name</th>
+                    <th>Car Model</th>
+                    <th>Car Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="car : ${listCars}">
+                    <td th:text="${car.name}"></td>
+                    <td th:text="${car.model}"></td>
+                    <td th:text="${car.price}"></td>
+                    <td th:text="${car.carStatus}"></td>
+                    <td>
+                        <a th:href="@{/cars/{id}/edit(id = ${car.id})}" class="btn btn-sm btn-primary m-1" th:if="${#authentication.getPrincipal().getAuthorities().get(0).toString() == 'ADMIN'}" th:text="Edit"></a>
+                        <a th:href="@{/cars/{id}/delete(id = ${car.id})}" class="btn btn-sm btn-warning m-1" th:if="${#authentication.getPrincipal().getAuthorities().get(0).toString() == 'ADMIN'}" th:text="Delete"></a>
+                        <a th:href="@{/reservations/{id}/add(id = ${car.id})}" class="btn btn-sm btn-success m-1" th:if="${#authentication.getPrincipal().getAuthorities().get(0).toString() == 'USER' && car.carStatus.toString() == 'AVAILABLE' }">Make reservation</a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

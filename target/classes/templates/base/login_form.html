@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" th:action="@{/login}" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <p th:if="${loginError}" class="alert alert-danger" role="alert">Wrong user or password
+        </p>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="email" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" style="width: 100%;" type="submit">Sign in</button>
+    </form>
+    <a th:href="@{'/register'}"><button class="btn btn-lg btn-success btn-block" style="width: 100%;">Create new account</button></a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>

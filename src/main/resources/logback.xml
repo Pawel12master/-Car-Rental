@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <property name="logs" value="./logs" />
+
+    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logs}/logger.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logs}/rollback/logger-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1GB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+        </layout>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="Console" />
+        <appender-ref ref="RollingFile" />
+    </root>
+
+    <logger name="com.example.biznes" level="trace" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="RollingFile" />
+    </logger>
+</configuration>

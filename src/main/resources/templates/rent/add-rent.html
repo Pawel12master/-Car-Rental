@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Car Managment System</h1>
+    <h2>Make a rent</h2>
+    <form th:action="@{/rents/create}" th:object="${rent}" method="POST">
+        <h2>Are you sure ?</h2>
+        <input type="text" th:field="*{user}" placeholder="End date" class="form-control mb-4 col-4" required hidden>
+        <input type="text" th:field="*{car}" placeholder="End date" class="form-control mb-4 col-4" required hidden>
+
+        <button type="submit" class="btn btn-info col-2">Pay</button>
+    </form>
+</div>
+</body>
+</html>
